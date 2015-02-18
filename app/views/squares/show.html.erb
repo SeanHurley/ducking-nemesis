@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>X:</strong>
+  <%= @square.x %>
+</p>
+
+<p>
+  <strong>Y:</strong>
+  <%= @square.y %>
+</p>
+
+<%= link_to 'Edit', edit_square_path(@square) %> |
+<%= link_to 'Back', squares_path %>

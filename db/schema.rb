@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211015607) do
+ActiveRecord::Schema.define(version: 20150218001635) do
+
+  create_table "pools", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "squares", force: :cascade do |t|
+    t.integer  "x"
+    t.integer  "y"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
