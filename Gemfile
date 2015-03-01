@@ -15,6 +15,12 @@ gem "less-rails"
 gem "twitter-bootstrap-rails"
 
 group :development, :test do
+  gem 'foreman'
+  gem 'unicorn-rails'
+  gem 'guard'
+  gem 'guard-unicorn'
+  gem 'guard-rails'
+
   gem "rspec-rails"
   gem "byebug"
   gem "web-console", "~> 2.0"
