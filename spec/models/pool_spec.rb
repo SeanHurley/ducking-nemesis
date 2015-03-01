@@ -21,4 +21,22 @@ RSpec.describe Pool, type: :model do
       expect(pool).to_not be_filled
     end
   end
+
+  describe "validations" do
+    context "cost" do
+      it "must be a number" do
+        pool = Pool.new(:cost => "nonumber")
+
+        expect(pool).to_not be_valid
+        expect(pool.errors[:cost]).to be_present
+      end
+
+      it "is required" do
+        pool = Pool.new(:cost => nil)
+
+        expect(pool).to_not be_valid
+        expect(pool.errors[:cost]).to be_present
+      end
+    end
+  end
 end
