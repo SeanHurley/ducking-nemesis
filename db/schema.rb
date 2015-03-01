@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150218004552) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "pools", force: :cascade do |t|
     t.string   "name"
     t.integer  "cost"
@@ -28,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150218004552) do
     t.integer  "pool_id"
   end
 
-  add_index "squares", ["pool_id"], name: "index_squares_on_pool_id"
+  add_index "squares", ["pool_id"], name: "index_squares_on_pool_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
