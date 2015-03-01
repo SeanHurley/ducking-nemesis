@@ -1,0 +1,29 @@
+<%= form_for(@pool_detail) do |f| %>
+  <% if @pool_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pool_detail.errors.count, "error") %> prohibited this pool_detail from being saved:</h2>
+
+      <ul>
+      <% @pool_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :axis_assignment %><br>
+    <%= f.text_field :axis_assignment %>
+  </div>
+  <div class="field">
+    <%= f.label :position %><br>
+    <%= f.number_field :position %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br>
+    <%= f.number_field :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

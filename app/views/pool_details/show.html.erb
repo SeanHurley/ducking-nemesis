@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Axis assignment:</strong>
+  <%= @pool_detail.axis_assignment %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @pool_detail.position %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @pool_detail.value %>
+</p>
+
+<%= link_to 'Edit', edit_pool_detail_path(@pool_detail) %> |
+<%= link_to 'Back', pool_details_path %>

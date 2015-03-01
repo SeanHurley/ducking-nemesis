@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pool Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Axis assignment</th>
+      <th>Position</th>
+      <th>Value</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pool_details.each do |pool_detail| %>
+      <tr>
+        <td><%= pool_detail.axis_assignment %></td>
+        <td><%= pool_detail.position %></td>
+        <td><%= pool_detail.value %></td>
+        <td><%= link_to 'Show', pool_detail %></td>
+        <td><%= link_to 'Edit', edit_pool_detail_path(pool_detail) %></td>
+        <td><%= link_to 'Destroy', pool_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pool detail', new_pool_detail_path %>

@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218004552) do
+ActiveRecord::Schema.define(version: 20150224030641) do
+
+  create_table "pool_details", force: :cascade do |t|
+    t.string   "axis_assignment"
+    t.integer  "position"
+    t.integer  "value"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "pool_id"
+  end
+
+  add_index "pool_details", ["pool_id"], name: "index_pool_details_on_pool_id"
 
   create_table "pools", force: :cascade do |t|
     t.string   "name"
@@ -26,9 +37,11 @@ ActiveRecord::Schema.define(version: 20150218004552) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "pool_id"
+    t.integer  "user_id"
   end
 
   add_index "squares", ["pool_id"], name: "index_squares_on_pool_id"
+  add_index "squares", ["user_id"], name: "index_squares_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
