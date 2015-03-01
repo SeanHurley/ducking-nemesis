@@ -1,25 +1,45 @@
-<%= form_for(@square) do |f| %>
-  <% if @square.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@square.errors.count, "error") %> prohibited this square from being saved:</h2>
+<%= form_for @square, :html => { :class => "form-horizontal square" } do |f| %>
 
-      <ul>
-      <% @square.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @square.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@square.errors.count, "error") %> prohibited this square from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @square.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :x %><br>
-    <%= f.number_field :x %>
+  <div class="control-group">
+    <%= f.label :x, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :x, :class => 'form-control' %>
+    </div>
+    <%= error_span(@square[:x]) %>
   </div>
-  <div class="field">
-    <%= f.label :y %><br>
-    <%= f.number_field :y %>
+  <div class="control-group">
+    <%= f.label :y, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :y, :class => 'form-control' %>
+    </div>
+    <%= error_span(@square[:y]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="control-group">
+    <%= f.label :pool_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :pool_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@square[:pool_id]) %>
   </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            squares_path, :class => 'btn btn-default' %>
+
 <% end %>
