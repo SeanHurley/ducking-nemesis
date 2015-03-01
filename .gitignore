@@ -29,3 +29,4 @@ config/secrets.yml
 *.bowerrc
 bower.json
 public/assets/**
+.DS_Store

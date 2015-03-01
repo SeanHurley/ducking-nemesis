@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218004552) do
+ActiveRecord::Schema.define(version: 20150224030225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pool_details", force: :cascade do |t|
+    t.boolean  "row"
+    t.integer  "position"
+    t.integer  "value"
+    t.integer  "pool_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pool_details", ["pool_id"], name: "index_pool_details_on_pool_id", using: :btree
 
   create_table "pools", force: :cascade do |t|
     t.string   "name"
@@ -29,9 +40,11 @@ ActiveRecord::Schema.define(version: 20150218004552) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "pool_id"
+    t.integer  "user_id"
   end
 
   add_index "squares", ["pool_id"], name: "index_squares_on_pool_id", using: :btree
+  add_index "squares", ["user_id"], name: "index_squares_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

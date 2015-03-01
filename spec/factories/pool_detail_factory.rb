@@ -1,7 +1,8 @@
 FactoryGirl.define do
-  factory :square do
-    x 0
-    y 0
+  factory :pool_detail do
+    row true
+    value 0
+    position 7
     association :pool, :factory => :pool
   end
 end

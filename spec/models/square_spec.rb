@@ -25,8 +25,9 @@ RSpec.describe Square, type: :model do
     end
 
     it "require x and y to be unique for a given pool" do
-      FactoryGirl.create(:square, :x => 1, :y => 1)
-      new_square = FactoryGirl.build(:square, :x => 1, :y => 1)
+      pool = FactoryGirl.create(:pool)
+      FactoryGirl.create(:square, :x => 1, :y => 1, :pool => pool)
+      new_square = FactoryGirl.build(:square, :x => 1, :y => 1, :pool => pool)
 
       expect(new_square).to_not be_valid
     end
