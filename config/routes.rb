@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :squares
-
-  resources :pools
+  resources :pools do
+    resources :squares
+  end
 
   resources :users
   root 'users#index'

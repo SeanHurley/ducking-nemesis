@@ -1,4 +1,4 @@
-<%= form_for @square, :html => { :class => "form-horizontal square" } do |f| %>
+<%= form_for [@pool, @square], :html => { :class => "form-horizontal square" } do |f| %>
 
     <% if @square.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -29,17 +29,10 @@
     </div>
     <%= error_span(@square[:y]) %>
   </div>
-  <div class="control-group">
-    <%= f.label :pool_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :pool_id, :class => 'form-control' %>
-    </div>
-    <%= error_span(@square[:pool_id]) %>
-  </div>
 
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            squares_path, :class => 'btn btn-default' %>
+            pool_squares_path(@pool), :class => 'btn btn-default' %>
 
 <% end %>

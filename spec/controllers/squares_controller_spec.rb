@@ -18,18 +18,27 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe SquaresController, type: :controller do
+RSpec.describe SquaresController, :type => :controller do
+  render_views
 
   # This should return the minimal set of attributes required to create a valid
   # Square. As you add validations to Square, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      :x => 0,
+      :y => 0,
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      :x => 22,
+      :y => 33,
+    }
   }
+
+  let(:pool) { FactoryGirl.create(:pool) }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -38,31 +47,38 @@ RSpec.describe SquaresController, type: :controller do
 
   describe "GET #index" do
     it "assigns all squares as @squares" do
-      square = Square.create! valid_attributes
-      get :index, {}, valid_session
+      square = FactoryGirl.create(:square, :pool => pool)
+      get :index, {:pool_id => pool.id}, valid_session
+      expect(assigns(:squares)).to eq([square])
+    end
+
+    it "only shows squares for the given pool" do
+      square = FactoryGirl.create(:square, :pool => pool)
+      FactoryGirl.create(:square, :pool => FactoryGirl.create(:pool))
+      get :index, {:pool_id => pool.id}, valid_session
       expect(assigns(:squares)).to eq([square])
     end
   end
 
   describe "GET #show" do
     it "assigns the requested square as @square" do
-      square = Square.create! valid_attributes
-      get :show, {:id => square.to_param}, valid_session
+      square = FactoryGirl.create(:square, :pool => pool)
+      get :show, {:pool_id => pool.id, :id => square.to_param}, valid_session
       expect(assigns(:square)).to eq(square)
     end
   end
 
   describe "GET #new" do
     it "assigns a new square as @square" do
-      get :new, {}, valid_session
+      get :new, {:pool_id => pool.id}, valid_session
       expect(assigns(:square)).to be_a_new(Square)
     end
   end
 
   describe "GET #edit" do
     it "assigns the requested square as @square" do
-      square = Square.create! valid_attributes
-      get :edit, {:id => square.to_param}, valid_session
+      square = FactoryGirl.create(:square, :pool => pool)
+      get :edit, {:pool_id => pool.id, :id => square.to_param}, valid_session
       expect(assigns(:square)).to eq(square)
     end
   end
@@ -71,30 +87,31 @@ RSpec.describe SquaresController, type: :controller do
     context "with valid params" do
       it "creates a new Square" do
         expect {
-          post :create, {:square => valid_attributes}, valid_session
+          post :create, {:pool_id => pool.id, :square => valid_attributes}, valid_session
+
         }.to change(Square, :count).by(1)
       end
 
       it "assigns a newly created square as @square" do
-        post :create, {:square => valid_attributes}, valid_session
+        post :create, {:pool_id => pool.id, :square => valid_attributes}, valid_session
         expect(assigns(:square)).to be_a(Square)
         expect(assigns(:square)).to be_persisted
       end
 
       it "redirects to the created square" do
-        post :create, {:square => valid_attributes}, valid_session
-        expect(response).to redirect_to(Square.last)
+        post :create, {:pool_id => pool.id, :square => valid_attributes}, valid_session
+        expect(response).to redirect_to(pool_square_path(pool, Square.last))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved square as @square" do
-        post :create, {:square => invalid_attributes}, valid_session
+        post :create, {:pool_id => pool.id, :square => invalid_attributes}, valid_session
         expect(assigns(:square)).to be_a_new(Square)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:square => invalid_attributes}, valid_session
+        post :create, {:pool_id => pool.id, :square => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -103,39 +120,43 @@ RSpec.describe SquaresController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          :x => 6,
+          :y => 8,
+        }
       }
 
       it "updates the requested square" do
-        square = Square.create! valid_attributes
-        put :update, {:id => square.to_param, :square => new_attributes}, valid_session
+        square = FactoryGirl.create(:square, :pool => pool)
+        put :update, {:pool_id => pool.id, :id => square.to_param, :square => new_attributes}, valid_session
         square.reload
-        skip("Add assertions for updated state")
+        expect(square.x).to eq(6)
+        expect(square.y).to eq(8)
       end
 
       it "assigns the requested square as @square" do
-        square = Square.create! valid_attributes
-        put :update, {:id => square.to_param, :square => valid_attributes}, valid_session
+        square = FactoryGirl.create(:square, :pool => pool)
+        put :update, {:pool_id => pool.id, :id => square.to_param, :square => valid_attributes}, valid_session
         expect(assigns(:square)).to eq(square)
       end
 
       it "redirects to the square" do
-        square = Square.create! valid_attributes
-        put :update, {:id => square.to_param, :square => valid_attributes}, valid_session
-        expect(response).to redirect_to(square)
+        square = FactoryGirl.create(:square, :pool => pool)
+        put :update, {:pool_id => pool.id, :id => square.to_param, :square => valid_attributes}, valid_session
+        expect(response).to redirect_to(pool_square_path(pool, square))
       end
     end
 
     context "with invalid params" do
       it "assigns the square as @square" do
-        square = Square.create! valid_attributes
-        put :update, {:id => square.to_param, :square => invalid_attributes}, valid_session
+        square = FactoryGirl.create(:square, :pool => pool)
+        put :update, {:pool_id => pool.id, :id => square.to_param, :square => invalid_attributes}, valid_session
         expect(assigns(:square)).to eq(square)
       end
 
       it "re-renders the 'edit' template" do
-        square = Square.create! valid_attributes
-        put :update, {:id => square.to_param, :square => invalid_attributes}, valid_session
+        square = FactoryGirl.create(:square, :pool => pool)
+        put :update, {:pool_id => pool.id, :id => square.to_param, :square => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -143,17 +164,16 @@ RSpec.describe SquaresController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested square" do
-      square = Square.create! valid_attributes
+      square = FactoryGirl.create(:square, :pool => pool)
       expect {
-        delete :destroy, {:id => square.to_param}, valid_session
+        delete :destroy, {:pool_id => pool.id, :id => square.to_param}, valid_session
       }.to change(Square, :count).by(-1)
     end
 
     it "redirects to the squares list" do
-      square = Square.create! valid_attributes
-      delete :destroy, {:id => square.to_param}, valid_session
-      expect(response).to redirect_to(squares_url)
+      square = FactoryGirl.create(:square, :pool => pool)
+      delete :destroy, {:pool_id => pool.id, :id => square.to_param}, valid_session
+      expect(response).to redirect_to(pool_squares_url(pool))
     end
   end
-
 end
