@@ -28,8 +28,8 @@
       <% 10.times do |y| %>
         <td>
           <% square = @pool.squares.where(:x => x, :y => y).first %>
-          <div class="content">
-            <%= square.nil? ? "Available" : "TAKEN" %>
+            <div class="content">
+              <%= square.nil? ? "Available" : square.user.name  %>
           </div>
         </td>
       <% end %>

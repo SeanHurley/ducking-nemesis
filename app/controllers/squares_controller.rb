@@ -75,6 +75,6 @@ class SquaresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def square_params
-      params.require(:square).permit(:x, :y)
+      params.require(:square).permit(:x, :y, :user_id)
     end
 end

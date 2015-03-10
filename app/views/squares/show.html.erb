@@ -10,6 +10,8 @@
   <dd><%= @square.y %></dd>
   <dt><strong><%= model_class.human_attribute_name(:pool_id) %>:</strong></dt>
   <dd><%= @square.pool_id %></dd>
+  <dt><strong><%=model_class.human_attribute_name(:user_id) %>:</strong?></dt>
+  <dd><%= @square.user_id %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

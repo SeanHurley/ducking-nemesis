@@ -9,6 +9,7 @@
       <th><%= model_class.human_attribute_name(:x) %></th>
       <th><%= model_class.human_attribute_name(:y) %></th>
       <th><%= model_class.human_attribute_name(:pool_id) %></th>
+      <th><%= model_class.human_attribute_name(:user_id)  %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -20,6 +21,7 @@
         <td><%= square.x %></td>
         <td><%= square.y %></td>
         <td><%= square.pool_id %></td>
+        <td><%= square.user_id %></td>
         <td><%=l square.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
