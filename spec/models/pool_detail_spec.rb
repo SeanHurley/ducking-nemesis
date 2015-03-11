@@ -39,5 +39,18 @@ RSpec.describe PoolDetail, type: :model do
 
       expect(new_pool_detail).to be_valid
     end
+
+    it "requires a row boolean" do
+      pool_detail = FactoryGirl.build(:pool_detail, :row => nil)
+
+      expect(pool_detail).to_not be_valid
+      expect(pool_detail.errors[:row]).to_not be_blank
+    end
+
+    it "allows row to be false" do
+      pool_detail = FactoryGirl.build(:pool_detail, :row => false)
+
+      expect(pool_detail).to be_valid
+    end
   end
 end

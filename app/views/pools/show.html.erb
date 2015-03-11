@@ -23,13 +23,22 @@
               pool_squares_path(@pool), :class => 'btn btn-default'  %>
 
 <table class="table table-bordered">
-  <% 10.times do |x| %>
+  <% 11.times do |x| %>
     <tr>
-      <% 10.times do |y| %>
+      <% 11.times do |y| %>
         <td>
-          <% square = @pool.squares.where(:x => x, :y => y).first %>
-            <div class="content">
-              <%= square.nil? ? "Available" : square.user.name  %>
+          <div class="content">
+          <% if x == 0 && y == 0 %>
+          <% elsif x == 0 %>
+            <% row = @pool.pool_details.where(:row => false, :position => y - 1).first %>
+            <%= row.nil? ? "" : row.value %>
+          <% elsif y == 0 %>
+            <% column = @pool.pool_details.where(:row => true, :position => x - 1).first %>
+            <%= column.nil? ? "" : column.value %>
+          <% else %>
+            <% square = @pool.squares.where(:x => x-1, :y => y-1).first %>
+            <%= square.nil? ? "Available" : square.user.name  %>
+          <% end %>
           </div>
         </td>
       <% end %>

@@ -39,4 +39,14 @@ RSpec.describe Pool, type: :model do
       end
     end
   end
+
+  describe "finalize!" do
+    it "assigns pool details for each row and column" do
+      pool = FactoryGirl.create(:pool)
+
+      pool.finalize!
+
+      expect(pool.pool_details.count).to eq(20)
+    end
+  end
 end
