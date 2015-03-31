@@ -15,7 +15,7 @@ class SquaresController < ApplicationController
 
   # GET /squares/new
   def new
-    @square = @pool.squares.new
+    @square = @pool.squares.new(:x => params["x"], :y => params["y"])
   end
 
   # GET /squares/1/edit

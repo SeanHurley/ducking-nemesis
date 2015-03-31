@@ -37,7 +37,7 @@
             <%= column.nil? ? "" : column.value %>
           <% else %>
             <% square = @pool.squares.where(:x => x-1, :y => y-1).first %>
-            <%= square.nil? ? "Available" : square.user.name  %>
+            <%= square.nil? ? link_to("Available", new_pool_square_path(@pool, :x => x-1, :y => y-1)) : square.user.name  %>
           <% end %>
           </div>
         </td>
