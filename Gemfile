@@ -13,13 +13,14 @@ gem "jquery-rails"
 gem "therubyracer", platforms: :ruby
 gem "less-rails"
 gem "twitter-bootstrap-rails"
+gem "devise"
 
 group :development, :test do
-  gem 'foreman'
-  gem 'unicorn-rails'
-  gem 'guard'
-  gem 'guard-unicorn'
-  gem 'guard-rails'
+  gem "foreman"
+  gem "unicorn-rails"
+  gem "guard"
+  gem "guard-unicorn"
+  gem "guard-rails"
 
   gem "rspec-rails"
   gem "byebug"

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :pools do
     resources :squares
   end
-
-  resources :users
-  root 'users#index'
+  root 'pools#index'
 end
