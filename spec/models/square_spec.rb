@@ -10,6 +10,23 @@ RSpec.describe Square, type: :model do
       expect(square.errors[:pool_id]).to_not be_blank
     end
 
+    it "requires a user" do
+      square = FactoryGirl.build(:square)
+      square.user = nil
+
+      expect(square).to_not be_valid
+      expect(square.errors[:user_id]).to_not be_blank
+    end
+
+    it "requires a user in the database" do
+      square = FactoryGirl.build(:square)
+      square.user_id = 999
+
+      expect(square).to_not be_valid
+      p(square.errors)
+      expect(square.errors[:user_id]).to_not be_blank
+    end
+
     it "requires x to be less than 10" do
       square = FactoryGirl.build(:square, :x => 10000)
 

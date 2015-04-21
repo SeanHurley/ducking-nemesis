@@ -67,6 +67,11 @@ class PoolsController < ApplicationController
       @pool = Pool.find(params[:id])
     end
 
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @User = User.find(params[:user_id => current_user.id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def pool_params
       params.require(:pool).permit(:name, :cost)

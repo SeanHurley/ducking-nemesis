@@ -15,11 +15,11 @@
   <tbody>
     <% @pools.each do |pool| %>
       <tr>
-        <td><%= link_to pool.id, pool_path(pool) %></td>
-        <td><%= pool.name %></td>
-        <td><%= pool.cost %></td>
-        <td><%=l pool.created_at %></td>
-        <td>
+        <td class = "tablelist"><%= link_to pool.id, pool_path(pool) %></td>
+        <td class = "tablelist"><%= pool.name %></td>
+        <td class = "tablelist"><%= pool.cost %></td>
+        <td class = "tablelist"><%=l pool.created_at %></td>
+        <td class = "tablelist">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_pool_path(pool), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
